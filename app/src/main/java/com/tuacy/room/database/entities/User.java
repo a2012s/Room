@@ -3,59 +3,64 @@ package com.tuacy.room.database.entities;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+/**
+ * 数据库中的表。
+ */
 @Entity
 public class User {
 
-	@PrimaryKey(autoGenerate = true)
-	private long    uid;
-	private String  name;
-	private String  address;
-	private String  phone;
-	private Integer age;
+    @PrimaryKey(autoGenerate = true)
+    private long uid;
+    private String name;
+    private String address;
+    private String phone;
+    private Integer age;
 
-	public long getUid() {
-		return uid;
-	}
 
-	public void setUid(long uid) {
-		this.uid = uid;
-	}
 
-	public String getName() {
-		return name;
-	}
+    public long getUid() {
+        return uid;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	@Override
-	public String toString() {
-		return "User{" + "uid=" + uid + ", name='" + name + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + ", age=" +
-			   age + '}';
-	}
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "uid=" + uid + ", name='" + name + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + ", age=" +
+                age + '}';
+    }
 }
