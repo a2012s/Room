@@ -1,4 +1,4 @@
-package com.tuacy.room.database.tuple;
+package com.tuacy.room.database.entities;
 
 public class NameTuple {
 
