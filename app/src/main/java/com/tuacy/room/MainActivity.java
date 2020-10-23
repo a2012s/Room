@@ -33,8 +33,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.button_add_user).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // add_user();
-                add_headItem();
+                add_user();
+                //add_headItem();
             }
         });
 
@@ -55,8 +55,8 @@ public class MainActivity extends BaseActivity {
                 List<Long> ids = mAppDatabase.bookDao().insert(book);
                 if (ids != null && ids.size() > 0) {
 
-					book.setUid(ids.get(ids.size() - 1));
-					textView.setText("添加 "+ book.toString());
+                    book.setUid(ids.get(ids.size() - 1));
+                    textView.setText("添加 " + book.toString());
 
                     for (Long id : ids) {
                         Log.d("tuacy", "id = " + id);
@@ -98,26 +98,33 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void accept(List<User> entities) {
                         if (entities != null) {
+                            StringBuilder sb = new StringBuilder();
                             for (User user : entities) {
                                 Log.d("tuacy", user.toString());
-                                textView.setText(user.toString());
+                                sb.append(user.toString() + "\n");
+
                             }
+                            textView.setText(sb.toString());
                         }
 
                     }
                 });
     }
 
+
+    private int no = 1;
+
     private void add_user() {
-        User user = new User();
-        user.setPhone("18988195061");
-        user.setAddress("珠海");
-        user.setName("tuacy");
+        no++;
+        User user = new User(no, "tuac2", "广州", "18988195061", 18 + no, null);
+//        user.setPhone("18988195061");
+//        user.setAddress("珠海");
+//        user.setName("tuacy");
         //				user.setAge("28");
         List<Long> ids = mAppDatabase.userDao().insert(user);
         if (ids != null && ids.size() > 0) {
             user.setUid(ids.get(ids.size() - 1));
-            textView.setText("添加 "+ user.toString());
+            textView.setText("添加 " + user.toString());
             for (Long id : ids) {
                 Log.d("tuacy", "id = " + id);
 
@@ -126,11 +133,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void add_headItem() {
-        HeadItem user = new HeadItem(55L,"测试的");
+        HeadItem user = new HeadItem(55L, "测试的");
+//        user.setDays();
 
         //				user.setAge("28");
-         mAppDatabase.headItemDao().insertHeadItem(user);
-         Log.d("logcat",mAppDatabase.headItemDao().getHeadItemById(55L).getName());
+        mAppDatabase.headItemDao().insertHeadItem(user);
+        Log.d("logcat", mAppDatabase.headItemDao().getHeadItemById(55L).getName());
         textView.setText(String.format("添加 %s", mAppDatabase.headItemDao().getHeadItemById(55L).getName()));
 
     }
