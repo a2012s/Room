@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.tuacy.room.app.BaseActivity;
+import com.tuacy.room.database.HeadItem;
 import com.tuacy.room.database.entities.Book;
 import com.tuacy.room.database.entities.User;
 
@@ -32,42 +33,15 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.button_add_user).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User();
-                user.setPhone("18988195061");
-                user.setAddress("珠海");
-                user.setName("tuacy");
-                //				user.setAge("28");
-                List<Long> ids = mAppDatabase.userDao().insert(user);
-                if (ids != null && ids.size() > 0) {
-                	user.setUid(ids.get(ids.size() - 1));
-                    textView.setText("添加 "+ user.toString());
-                    for (Long id : ids) {
-                        Log.d("tuacy", "id = " + id);
-
-                    }
-                }
+               // add_user();
+                add_headItem();
             }
         });
 
         findViewById(R.id.button_get_user).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAppDatabase.userDao()
-                        .loadUser()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<List<User>>() {
-                            @Override
-                            public void accept(List<User> entities) {
-                                if (entities != null) {
-                                    for (User user : entities) {
-                                        Log.d("tuacy", user.toString());
-                                        textView.setText(user.toString());
-                                    }
-                                }
-
-                            }
-                        });
+                get_user();
             }
         });
 
@@ -113,5 +87,51 @@ public class MainActivity extends BaseActivity {
                         });
             }
         });
+    }
+
+    private void get_user() {
+        mAppDatabase.userDao()
+                .loadUser()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<User>>() {
+                    @Override
+                    public void accept(List<User> entities) {
+                        if (entities != null) {
+                            for (User user : entities) {
+                                Log.d("tuacy", user.toString());
+                                textView.setText(user.toString());
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    private void add_user() {
+        User user = new User();
+        user.setPhone("18988195061");
+        user.setAddress("珠海");
+        user.setName("tuacy");
+        //				user.setAge("28");
+        List<Long> ids = mAppDatabase.userDao().insert(user);
+        if (ids != null && ids.size() > 0) {
+            user.setUid(ids.get(ids.size() - 1));
+            textView.setText("添加 "+ user.toString());
+            for (Long id : ids) {
+                Log.d("tuacy", "id = " + id);
+
+            }
+        }
+    }
+
+    private void add_headItem() {
+        HeadItem user = new HeadItem(55L,"测试的");
+
+        //				user.setAge("28");
+         mAppDatabase.headItemDao().insertHeadItem(user);
+         Log.d("logcat",mAppDatabase.headItemDao().getHeadItemById(55L).getName());
+        textView.setText(String.format("添加 %s", mAppDatabase.headItemDao().getHeadItemById(55L).getName()));
+
     }
 }

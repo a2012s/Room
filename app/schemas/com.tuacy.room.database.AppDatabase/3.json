@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "a2064871f7c165ec727b38ca359b7ff0",
+    "identityHash": "e77db958c4856eff8a108c32f4fc19d6",
     "entities": [
       {
         "tableName": "User",
@@ -97,11 +97,68 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "HeadItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `childStartIndex` INTEGER NOT NULL, `childEndIndex` INTEGER NOT NULL, `allCheck` INTEGER NOT NULL, `days` TEXT NOT NULL, `times` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "childStartIndex",
+            "columnName": "childStartIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "childEndIndex",
+            "columnName": "childEndIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "allCheck",
+            "columnName": "allCheck",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "days",
+            "columnName": "days",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "times",
+            "columnName": "times",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
+    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a2064871f7c165ec727b38ca359b7ff0\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e77db958c4856eff8a108c32f4fc19d6')"
     ]
   }
 }

@@ -20,12 +20,14 @@ import com.tuacy.room.database.entities.User;
  * 包含具有 0 个参数且返回使用 @Dao 注释的类的抽象方法。
  * 在运行时，您可以通过调用 Room.databaseBuilder() 或 Room.inMemoryDatabaseBuilder() 获取 Database 的实例。
  */
-@Database(entities = {User.class, Book.class}, version = 3)
+@Database(entities = {User.class, Book.class, HeadItem.class}, version = 3)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
 
     public abstract BookDao bookDao();
+
+    public abstract HeadItemDao headItemDao();
 
 }
